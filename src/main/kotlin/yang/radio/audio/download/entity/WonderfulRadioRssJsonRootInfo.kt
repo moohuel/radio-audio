@@ -1,7 +1,7 @@
 package yang.radio.audio.download.entity
 
 data class WonderfulRadioRssJsonRootInfo(
-    val rss: WonderfulRadioChannelInfo?
+    val rss: WonderfulRadioChannelInfo
 )
 
 data class WonderfulRadioChannelInfo(
