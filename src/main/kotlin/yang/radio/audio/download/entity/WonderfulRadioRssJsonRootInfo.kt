@@ -1,23 +1,23 @@
 package yang.radio.audio.download.entity
 
 data class WonderfulRadioRssJsonRootInfo(
-    val rss: WonderfulRadioChannelInfo
+    val rss: WonderfulRadioRssInfo
 )
 
-data class WonderfulRadioChannelInfo(
-    val channel: WonderfulRadioItemRootInfo
+data class WonderfulRadioRssInfo(
+    val channel: WonderfulRadioRssChannelInfo
 )
 
-data class WonderfulRadioItemRootInfo(
-    val item: List<WonderfulRadioItemInfo>
+data class WonderfulRadioRssChannelInfo(
+    val item: List<WonderfulRadioRssItemInfo>
 )
 
-data class WonderfulRadioItemInfo(
+data class WonderfulRadioRssItemInfo(
     val title: String,
-    val enclosure: WonderfulRadioAudioEnclosureInfo
+    val enclosure: WonderfulRadiRssEnclosureInfo
 )
 
-data class WonderfulRadioAudioEnclosureInfo(
+data class WonderfulRadiRssEnclosureInfo(
     val url: String,
     val length: Int,
     val type: String

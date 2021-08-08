@@ -1,16 +1,16 @@
 package yang.radio.audio.download
 
 import org.springframework.stereotype.Service
-import yang.radio.audio.download.entity.WonderfulRadioAudioInfo
-import yang.radio.audio.download.entity.WonderfulRadioItemInfo
+import yang.radio.audio.download.entity.WonderfulRadioAudioItemInfo
+import yang.radio.audio.download.entity.WonderfulRadioRssItemInfo
 
 @Service
-class RadioAudioInfoConverter {
+class RadioAudioInfoReformer {
 
-    fun rebuildAudioInfo(item: WonderfulRadioItemInfo): WonderfulRadioAudioInfo? {
+    fun reformAudioInfo(rssItem: WonderfulRadioRssItemInfo): WonderfulRadioAudioItemInfo? {
 
         // 8/2(월) 원더풀라디오 이석훈입니다 1,2부/오늘 나의 하루는/원더풀 차차차
-        val originalTitle = item.title
+        val originalTitle = rssItem.title
 
         if(originalTitle.indexOf("강수지") > 0) {
             return null
@@ -32,12 +32,12 @@ class RadioAudioInfoConverter {
 
         var audioTitle = "wonderfulradio_leeseokhun_${year}${monthDay}_${divide}_${weekName}.mp3"
 
-        return WonderfulRadioAudioInfo(
+        return WonderfulRadioAudioItemInfo(
             audioTitle = audioTitle,
-            publicDay = "",
-            url = item.enclosure.url,
-            length = item.enclosure.length,
-            type = item.enclosure.type
+            broadcastDay = "${year}${monthDay}",
+            url = rssItem.enclosure.url,
+            length = rssItem.enclosure.length,
+            type = rssItem.enclosure.type
         )
     }
 
