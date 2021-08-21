@@ -5,9 +5,9 @@ import yang.radio.audio.download.entity.WonderfulRadioAudioItemInfo
 import yang.radio.audio.download.entity.WonderfulRadioRssItemInfo
 
 @Service
-class RadioAudioInfoReformer {
+class RadioAudioInfoExtractor {
 
-    fun reformAudioInfo(rssItem: WonderfulRadioRssItemInfo): WonderfulRadioAudioItemInfo? {
+    fun extractAudioInfo(rssItem: WonderfulRadioRssItemInfo): WonderfulRadioAudioItemInfo? {
 
         // 8/2(월) 원더풀라디오 이석훈입니다 1,2부/오늘 나의 하루는/원더풀 차차차
         val originalTitle = rssItem.title
@@ -43,8 +43,8 @@ class RadioAudioInfoReformer {
 
     private fun makeMonthDay(timeTitle: String): String {
 
-        var month = timeTitle.substring(0, timeTitle.indexOf("/"))
-        var day = timeTitle.substring(timeTitle.indexOf("/")+1)
+        var month = (timeTitle.substring(0, timeTitle.indexOf("/"))).trim()
+        var day = (timeTitle.substring(timeTitle.indexOf("/")+1)).trim()
 
         if(month.length == 1) {
             month = "0"+month

@@ -10,19 +10,19 @@ import yang.radio.audio.download.entity.WonderfulRadioRssJsonRootInfo
 class RadioAudioDownloadManager {
 
     @Autowired
-    lateinit var radioAudioDownloader: RadioAudioDownloader
-    @Autowired
     lateinit var radioAudioRssJsonDataLoader: RadioAudioRssJsonDataLoader
     @Autowired
-    lateinit var radioAudioInfoReformer: RadioAudioInfoReformer
+    lateinit var radioAudioInfoExtractor: RadioAudioInfoExtractor
+    @Autowired
+    lateinit var radioAudioDownloader: RadioAudioDownloader
 
     fun wonderfulRadio() {
 
         val param = makeParameter()
 
         val rssJsonRootInfo = radioAudioRssJsonDataLoader.audioRootInfoFromJson(param)
-        val reformedList = reformAudioInfo(rssJsonRootInfo)
-        val targetDownloadList = extractTargetDownload(reformedList, param)
+        val audioInfoList = extractAudioInfo(rssJsonRootInfo)
+        val targetDownloadList = extractTargetDownload(audioInfoList, param)
 
         downloadRadioAudio(targetDownloadList, param)
     }
@@ -31,25 +31,25 @@ class RadioAudioDownloadManager {
 
         return WonderfulRadioParameter(
             firstBroadcastDay = "20210531",
-            fromDay = "20210804",
-            jsonFilePath = "C:\\download\\wonderful_json\\json_ansi_210808.txt",
+            fromDay = "20210809",
+            jsonFilePath = "C:\\download\\wonderful_json\\json_ansi_210821.txt",
             audioOutputFileDir = "C:\\download\\wonderful"
         )
     }
 
-    private fun reformAudioInfo(rssJsonRootInfo: WonderfulRadioRssJsonRootInfo): List<WonderfulRadioAudioItemInfo> {
+    private fun extractAudioInfo(rssJsonRootInfo: WonderfulRadioRssJsonRootInfo): List<WonderfulRadioAudioItemInfo> {
 
-        val downloadList = ArrayList<WonderfulRadioAudioItemInfo>()
+        val audioInfoList = ArrayList<WonderfulRadioAudioItemInfo>()
 
         for ((index, item) in rssJsonRootInfo.rss.channel.item.withIndex()) {
 
-            val audioInfo = radioAudioInfoReformer.reformAudioInfo(item)
+            val audioInfo = radioAudioInfoExtractor.extractAudioInfo(item)
             if (audioInfo == null) {
                 continue
             }
-            downloadList.add(audioInfo)
+            audioInfoList.add(audioInfo)
         }
-        return downloadList
+        return audioInfoList
     }
 
     private fun extractTargetDownload(audioItemList: List<WonderfulRadioAudioItemInfo> , param: WonderfulRadioParameter):
@@ -59,7 +59,8 @@ class RadioAudioDownloadManager {
 
         for ((index, item) in audioItemList.withIndex()) {
 
-            //println("${item.broadcastDay.toInt()}, ${param.fromDay.toInt()}")
+//            println("item: $item")
+//            println("${item.broadcastDay.toInt()}, ${param.fromDay.toInt()}")
 
             if(item.broadcastDay.toInt() >= param.fromDay.toInt()) {
                 downloadList.add(item)
