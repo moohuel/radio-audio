@@ -29,10 +29,11 @@ class RadioAudioDownloadManager {
 
     private fun makeParameter(): WonderfulRadioParameter {
 
+        // ANSI 인코딩으로 저장해야 한글이 안 깨짐
         return WonderfulRadioParameter(
             firstBroadcastDay = "20210531",
-            fromDay = "20210809",
-            jsonFilePath = "C:\\download\\wonderful_json\\json_ansi_210821.txt",
+            fromDay = "20211004",
+            jsonFilePath = "C:\\download\\wonderful_json\\json_ansi_211004.txt",
             audioOutputFileDir = "C:\\download\\wonderful"
         )
     }

@@ -43,16 +43,23 @@ class RadioAudioInfoExtractor {
 
     private fun makeMonthDay(timeTitle: String): String {
 
-        var month = (timeTitle.substring(0, timeTitle.indexOf("/"))).trim()
-        var day = (timeTitle.substring(timeTitle.indexOf("/")+1)).trim()
+        try {
+            var month = (timeTitle.substring(0, timeTitle.indexOf("/"))).trim()
+            var day = (timeTitle.substring(timeTitle.indexOf("/")+1)).trim()
 
-        if(month.length == 1) {
-            month = "0"+month
-        }
-        if(day.length == 1) {
-            day = "0"+day
-        }
+            if(month.length == 1) {
+                month = "0"+month
+            }
+            if(day.length == 1) {
+                day = "0"+day
+            }
 
-        return month + day
+            return month + day
+        }
+        catch(e: Exception) {
+            println("ErrorLine: $timeTitle")
+            e.printStackTrace()
+            throw e
+        }
     }
 }
