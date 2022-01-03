@@ -32,8 +32,9 @@ class RadioAudioDownloadManager {
         // ANSI 인코딩으로 저장해야 한글이 안 깨짐
         return WonderfulRadioParameter(
             firstBroadcastDay = "20210531",
-            fromDay = "20211004",
-            jsonFilePath = "C:\\download\\wonderful_json\\json_ansi_211004.txt",
+            fromDay = "20211202",
+            toDay = "20211231",
+            jsonFilePath = "C:\\download\\wonderful_json\\json_ansi_20211231.txt",
             audioOutputFileDir = "C:\\download\\wonderful"
         )
     }
@@ -63,7 +64,7 @@ class RadioAudioDownloadManager {
 //            println("item: $item")
 //            println("${item.broadcastDay.toInt()}, ${param.fromDay.toInt()}")
 
-            if(item.broadcastDay.toInt() >= param.fromDay.toInt()) {
+            if(item.broadcastDay.toInt() >= param.fromDay.toInt() && item.broadcastDay.toInt() <= param.toDay.toInt()) {
                 downloadList.add(item)
             }
         }
