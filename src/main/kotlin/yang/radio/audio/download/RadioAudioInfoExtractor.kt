@@ -3,6 +3,8 @@ package yang.radio.audio.download
 import org.springframework.stereotype.Service
 import yang.radio.audio.download.entity.WonderfulRadioAudioItemInfo
 import yang.radio.audio.download.entity.WonderfulRadioRssItemInfo
+import java.time.LocalDateTime
+import java.util.*
 
 @Service
 class RadioAudioInfoExtractor {
@@ -17,8 +19,14 @@ class RadioAudioInfoExtractor {
         }
 
         var timeTitle = originalTitle.substring(0, originalTitle.indexOf("("))
+        var pubDate = rssItem.pubDate
 
+        //@ToDo
         var year = "2021"
+        if(pubDate.indexOf("2022") > 0) {
+            year = "2022"
+        }
+
         var monthDay = makeMonthDay(timeTitle)
         var weekName = originalTitle.substring(originalTitle.indexOf("(")+1, originalTitle.indexOf(")"))
 

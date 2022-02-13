@@ -1,5 +1,8 @@
 package yang.radio.audio.download.entity
 
+import java.time.LocalDateTime
+import java.util.*
+
 data class WonderfulRadioRssJsonRootInfo(
     val rss: WonderfulRadioRssInfo
 )
@@ -14,6 +17,8 @@ data class WonderfulRadioRssChannelInfo(
 
 data class WonderfulRadioRssItemInfo(
     val title: String,
+    //@ToDo LocalDatetime
+    val pubDate: String,
     val enclosure: WonderfulRadiRssEnclosureInfo
 )
 
