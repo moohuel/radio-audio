@@ -38,7 +38,7 @@ class RadioAudioInfoExtractor {
             divide = "2"
         }
 
-        var audioTitle = "wonderfulradio_leeseokhun_${year}${monthDay}_${divide}_${weekName}.mp3"
+        var audioTitle = "wonderfulradio_leeseokhoon_${year}${monthDay}_${divide}_${weekName}.mp3"
 
         return WonderfulRadioAudioItemInfo(
             audioTitle = audioTitle,
