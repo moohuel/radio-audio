@@ -26,9 +26,8 @@ class BrunchCafeDownloadManager {
         for((index, url) in urlList.withIndex()) {
 
             var outputAudioTitle = parameter.outputAudioTitleList.get(index)
-            println(outputAudioTitle)
-
-            //brunchCafeAudioDownloader.download(url, outputAudioTitle, parameter.outputDir)
+            println("${outputAudioTitle} downloading..")
+            brunchCafeAudioDownloader.download(url, outputAudioTitle, parameter.outputDir)
         }
     }
 

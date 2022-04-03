@@ -36,9 +36,6 @@ class BrunchCafeAudioDownloader {
         output.close()
         inputStream.close()
 
-//        if(accumedLength != audioInfo.length) {
-//            println("NOT MATCH LENGTH: ${audioInfo.audioTitle}, ${audioInfo.length}, $accumedLength")
-//        }
     }
 
     private fun buildOutputStream(fileName: String, audioOutputFileDir: String): OutputStream {
